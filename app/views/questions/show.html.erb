@@ -1,0 +1,46 @@
+<h1><%= @q.title %></h1>
+<p><%= @q.body %></p>
+
+<% if @q.user %>
+  <p>
+    Created by:
+    <%= @q.user.full_name %>
+  </p>
+<% end %>
+
+<%# if user_signed_in? && @q.user == current_user %>
+<% if can? :edit, @q %>
+    <%#= link_to "Edit", edit_question_path(id: @q.id) %>
+    <%= link_to "Edit", edit_question_path(@q), class: "btn btn-info btn-sm" %>
+<% end %>
+
+<% if can? :destroy, @q %>
+    <%= link_to "Delete", question_path(@q), method: :delete,
+                                            class: "btn btn-danger btn-sm",
+                                              data: {confirm: "Are you sure?"}%>
+<% end %>
+
+<h2>Submit an Answer</h2>
+<%# if @answer.errors.any? %>
+<%= @answer.errors.full_messages.join(", ") %>
+<%# form_for @answer, the action will be answers_path if @answer is not
+    persisted in the db (meaning it's just Answer.new)%>
+<%#= form_for @answer, url: question_answers_path(@q) do |f| %>
+<%= form_for [@q, @answer] do |f| %>
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>
+
+<h2>Answers</h2>
+<% @q.answers.each do |answer| %>
+  <div class="well">
+    <%= answer.body %>
+    <% if can? :destroy, answer %>
+      <%= link_to "Delete", question_answer_path(@q, answer), method: :delete,
+                class: "btn btn-danger btn-sm delete-right", data: {confirm: "Are you sure?"} %>
+    <% end %>
+  </div>
+<% end %>

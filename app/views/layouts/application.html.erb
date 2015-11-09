@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AwesomeAnswers</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container">
+    <%= render "/layouts/nav" %>
+
+    <!-- <a href="<%= root_path %>"><i class="glyphicon glyphicon-home"></i> Home</a> | -->
+    <!-- <a href="<%#= hello_path %>">Hello</a> -->
+    <!-- Link to is called a view helper, link_to is built-in with Rails. It  -->
+    <!-- generate an anchor HTML tag. -->
+    <!-- <%#= link_to("Hello", hello_path) %> -->
+    <!-- <%#= link_to("Hello Jade", greeting_path({name: "Jade"})) %> -->
+
+    <!-- <%#= index_path %>
+    <hr>
+    <%#= index_url %> -->
+
+    <%# we nned to add .html_safe to the string in order for Rails not to escape the HTML inside the string. By default, Rails assumes that strings are not as they may be input form users which may contain malicious script tags. Rails requires you to be explicit about when string are safe by calling .html_safe method. %>
+    <!-- <%= link_to "<i class='glyphicon glyphicon-plus'></i>New Question".html_safe, new_question_path %> | -->
+    <!-- <%= link_to "Question", questions_path %> -->
+    <!-- <%#= flash[:notice] || flash[:alert] %> -->
+    <% if flash[:notice] %>
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= flash[:notice] %>
+      </div>
+    <% elsif flash[:alert] %>
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+    <%= yield %>
+  </div>
+</body>
+</html>
