@@ -1,4 +1,5 @@
 <h1>All Questions</h1>
+<%= image_tag "bigbird.png" %>
 <% @questions.each do |ques| %>
   <div class="well">
   <%= link_to ques.title, question_path(ques) %>
