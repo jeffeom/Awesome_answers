@@ -20,6 +20,42 @@
                                               data: {confirm: "Are you sure?"}%>
 <% end %>
 
+<%#= link_to "Like", question_likes_path(@q), class: "btn btn-info btn-sm",
+                    method: :post %>
+<% if user_signed_in? && @q.liked_by?(current_user) %>
+<%= link_to fa_icon("thumbs-up"), question_like_path(@q, @q.like_for(current_user)),
+                    method: :delete, class: "icon-big" %>
+<% else %>
+<%= link_to fa_icon("thumbs-o-up"), question_likes_path(@q), class: "icon-big",
+                    method: :post %>
+<% end %>
+
+Liked: <%= pluralize(@q.likes.count, "time") %>
+
+<% if !user_signed_in? || !@q.voted_on_by?(current_user) %>
+  <%= link_to fa_icon("arrow-up"), question_votes_path(@q, {vote: {is_up: true}}),
+                  method: :post, class: "icon-big"%>
+  <%= link_to fa_icon("arrow-down"), question_votes_path(@q, {vote: {is_up: false}}),
+                  method: :post, class: "icon-big"%>
+  Voted: (<%= @q.vote_result %>)
+<% elsif @q.vote_for(current_user).is_up? %>
+  <%= link_to fa_icon("arrow-up"), question_vote_path(@q, @q.vote_for(current_user)),
+                  method: :delete, class: "icon-big text-danger"%>
+  <%= link_to fa_icon("arrow-down"),
+                  question_vote_path(@q, @q.vote_for(current_user), {vote: {is_up: false}}),
+                  method: :patch, class: "icon-big"%>
+  Voted: (<%= @q.vote_result %>)
+<% elsif !@q.vote_for(current_user).is_up? %>
+  <%= link_to fa_icon("arrow-up"),
+                  question_vote_path(@q, @q.vote_for(current_user), {vote: {is_up: true}}),
+                  method: :patch, class: "icon-big"%>
+  <%= link_to fa_icon("arrow-down"),
+                  question_vote_path(@q, @q.vote_for(current_user)),
+                  method: :delete, class: "icon-big text-danger"%>
+  Voted: (<%= @q.vote_result %>)
+<% end %>
+
+
 <h2>Submit an Answer</h2>
 <%# if @answer.errors.any? %>
 <%= @answer.errors.full_messages.join(", ") %>

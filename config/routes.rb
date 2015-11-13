@@ -39,8 +39,19 @@ Rails.application.routes.draw do
     # the standard answers urls will be prepended with:
     # /questions/:question_id
     resources :answers
+    # Avoid doing this:
+    # resources :answers do
+    #   resources :comments
+    # end
+
+    resources :likes, only: [:create, :destroy]
+    resources :favourites, only: [:create, :destroy]
+    resources :votes, only: [:create, :destroy, :update]
   end
 
+  resources :answers, only: [:index] do
+    resources :comments
+  end
 
   #resources :questions
   # get "/greeting/:name"    => "welcome#greeting", as: :greeting

@@ -16,6 +16,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
+gem 'font-awesome-rails'
+
 gem 'cancancan', '~> 1.10'
 
 gem "bootstrap-sass"
@@ -60,8 +62,9 @@ gem 'bcrypt', '~> 3.1.7'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  
+
   gem 'rails-erd'
+  gem "letter_opener"
 end
 
 group :development do
