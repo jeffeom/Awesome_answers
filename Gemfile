@@ -16,6 +16,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
+gem 'friendly_id', '~> 5.1.0'
+
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
 

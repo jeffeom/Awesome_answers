@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
     answer_params = params.require(:answer).permit(:body)
     # params[:question_id] is coming from the URL which looks like:
     # /questions/98/answers
-    @q = Question.find params[:question_id]
+    @q = Question.friendly.find params[:question_id]
     # @answer = Answer.new answer_params
     # this will initiate the Answer object with user_id perpopulated with
     # current_user.id

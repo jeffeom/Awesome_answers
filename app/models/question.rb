@@ -31,6 +31,10 @@ class Question < ActiveRecord::Base
   after_initialize :set_default_values
   before_validation :capitalize_title
 
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history]
+  # console Question.all.map(&:save)
+
   def self.recent_ten
     order("created_at DESC").limit(10)
   end
@@ -72,6 +76,10 @@ class Question < ActiveRecord::Base
   def vote_result
     votes.select{|v| v.is_up?}.count - votes.select{|v| !v.is_up?}.count
   end
+
+  # def to_param
+  #   "#{id}-#{title}".parameterize
+  # end
 
   private
 

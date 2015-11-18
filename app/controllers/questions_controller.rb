@@ -54,6 +54,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    # this will make friendly id regenerate a slug for you.
+    @q.slug = nil;
     if @q.update(question_params)
       redirect_to question_path(@q), notice: "Question updated!"
       # render text: "inside update #{params}"
@@ -65,7 +67,8 @@ class QuestionsController < ApplicationController
   def index
     # QuestionsCleanupJob.perform_later
     Rails.logger.error ">>>>>>>>>>>> #{current_user}"
-    @questions = Question.recent_ten
+    # @questions = Question.recent_ten
+    @questions = Question.all
   end
 
   def destroy
@@ -85,7 +88,11 @@ class QuestionsController < ApplicationController
   end
 
   def find_question
-    @q = Question.find params[:id]
+    # finding the question by its id
+    @q = Question.friendly.find params[:id]
+    # this will redirect the user to the new url (with new slug) if firendly
+    # id found the question using an old slug 
+    redirect_to @q if @q.slug != params[:id]
   end
 
   def authorize
