@@ -63,7 +63,8 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    Rails.logger.error ">>>>>>>>>>>> #{current_user }"
+    # QuestionsCleanupJob.perform_later
+    Rails.logger.error ">>>>>>>>>>>> #{current_user}"
     @questions = Question.recent_ten
   end
 

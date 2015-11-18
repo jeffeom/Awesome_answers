@@ -16,6 +16,9 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
+
 gem 'font-awesome-rails'
 
 gem 'cancancan', '~> 1.10'
