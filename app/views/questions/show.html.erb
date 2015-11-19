@@ -59,15 +59,11 @@ Liked: <%= pluralize(@q.likes.count, "time") %>
 
 <h2>Submit an Answer</h2>
 <%# if @answer.errors.any? %>
-<%= @answer.errors.full_messages.join(", ") %>
 <%# form_for @answer, the action will be answers_path if @answer is not
     persisted in the db (meaning it's just Answer.new)%>
 <%#= form_for @answer, url: question_answers_path(@q) do |f| %>
-<%= form_for [@q, @answer] do |f| %>
-  <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_area :body, class: "form-control" %>
-  </div>
+<%= simple_form_for [@q, @answer] do |f| %>
+  <%= f.input :body %>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
 

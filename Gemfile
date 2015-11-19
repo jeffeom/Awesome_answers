@@ -15,6 +15,7 @@ source 'https://rubygems.org'
 # 3. Bundler will update Gemfile.lock with that version.
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'simple_form'
 
 gem 'friendly_id', '~> 5.1.0'
 

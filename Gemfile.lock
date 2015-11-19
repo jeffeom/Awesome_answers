@@ -159,6 +159,9 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    simple_form (3.2.0)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -218,6 +221,7 @@ DEPENDENCIES
   rails-erd
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  simple_form
   spring
   therubyracer
   turbolinks
